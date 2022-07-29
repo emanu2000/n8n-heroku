@@ -1,13 +1,16 @@
 FROM node:lts-alpine
 
 # pass N8N_VERSION Argument while building or use default
-ARG N8N_VERSION=0.187.2
+ARG N8N_VERSION=0.188.0
 
 # Update everything and install needed dependencies
 RUN apk add --update graphicsmagick tzdata
 
 # Set a custom user to not have n8n run as root
 USER root
+
+# experimental -- isntalar nó para controlar o Chrome ou o Chromium pelo protocolo DevTools 
+RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-puppeteer
 
 # Install n8n and the also temporary all the packages
 # it needs to build it correctly.
